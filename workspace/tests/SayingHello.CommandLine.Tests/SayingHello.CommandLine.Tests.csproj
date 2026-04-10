@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\SayingHello.Contracts\SayingHello.Contracts.csproj" />
+    <ProjectReference Include="..\..\src\SayingHello.CommandLine\SayingHello.CommandLine.csproj" />
   </ItemGroup>
 
 </Project>
