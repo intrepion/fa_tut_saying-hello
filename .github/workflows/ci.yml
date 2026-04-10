@@ -22,10 +22,13 @@ jobs:
           dotnet-version: 10.0.x
 
       - name: Verify formatting
-        run: dotnet format --verify-no-changes
+        working-directory: workspace
+        run: dotnet format SayingHello.sln --verify-no-changes
 
       - name: Restore
-        run: dotnet restore
+        working-directory: workspace
+        run: dotnet restore SayingHello.sln
 
       - name: Test
-        run: dotnet test
+        working-directory: workspace
+        run: dotnet test SayingHello.sln
