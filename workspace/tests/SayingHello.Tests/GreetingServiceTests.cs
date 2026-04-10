@@ -24,4 +24,14 @@ public sealed class GreetingServiceTests
 
         Assert.Equal("Hello, Ada!", result);
     }
+
+    [Fact]
+    public void Greet_returns_generic_greeting_for_empty_string()
+    {
+        var sut = new GreetingService();
+
+        var result = sut.Greet("");
+
+        Assert.Equal("Hello!", result);
+    }
 }
