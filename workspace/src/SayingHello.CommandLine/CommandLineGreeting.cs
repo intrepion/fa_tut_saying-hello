@@ -8,6 +8,8 @@ public sealed class CommandLineGreeting(IGreetingService greetingService)
 
     public string BuildMessage(string[] args)
     {
-        return _greetingService.Greet(args[0]);
+        var name = args.Length > 0 ? args[0] : "";
+
+        return _greetingService.Greet(name);
     }
 }
