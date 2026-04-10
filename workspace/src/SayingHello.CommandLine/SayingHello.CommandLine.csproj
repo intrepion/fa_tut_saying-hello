@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SayingHello.Contracts\SayingHello.Contracts.csproj" />
+    <ProjectReference Include="..\SayingHello\SayingHello.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
