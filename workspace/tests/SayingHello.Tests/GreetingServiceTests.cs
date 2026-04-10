@@ -14,4 +14,14 @@ public sealed class GreetingServiceTests
 
         Assert.Equal("Hello, Ada!", result);
     }
+
+    [Fact]
+    public void Greet_trims_leading_and_trailing_whitespace()
+    {
+        var sut = new GreetingService();
+
+        var result = sut.Greet("  Ada  ");
+
+        Assert.Equal("Hello, Ada!", result);
+    }
 }
