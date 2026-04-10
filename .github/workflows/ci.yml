@@ -1,0 +1,34 @@
+name: CI
+
+on:
+push:
+branches:
+- main
+pull_request:
+branches:
+- main
+
+jobs:
+test:
+runs-on: ubuntu-latest
+
+steps:
+- name: Check out code
+uses: actions/checkout@v6
+
+- name: Set up .NET
+uses: actions/setup-dotnet@v5
+with:
+dotnet-version: 10.0.x
+
+- name: Verify formatting
+working-directory: workspace
+run: dotnet format SayingHello.sln --verify-no-changes
+
+- name: Restore
+working-directory: workspace
+run: dotnet restore SayingHello.sln
+
+- name: Test
+working-directory: workspace
+run: dotnet test SayingHello.sln
