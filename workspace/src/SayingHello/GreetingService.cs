@@ -6,6 +6,8 @@ public sealed class GreetingService : IGreetingService
 {
     public string Greet(string name)
     {
-        return $"Hello, {name}!";
+        var trimmedName = name.Trim();
+
+        return $"Hello, {trimmedName}!";
     }
 }
