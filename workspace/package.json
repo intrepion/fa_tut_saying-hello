@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "astro dev --host 0.0.0.0 --port 25617"
+    "dev": "astro dev --host 0.0.0.0 --port 25617",
+    "build": "astro build"
   },
   "keywords": [],
   "author": "",
