@@ -1,7 +1,10 @@
 package code
 
+import "strings"
+
 type GreetingService struct{}
 
 func (s GreetingService) Greet(name string) string {
-	return "Hello, " + name + "!"
+	trimmed := strings.TrimSpace(name)
+	return "Hello, " + trimmed + "!"
 }
