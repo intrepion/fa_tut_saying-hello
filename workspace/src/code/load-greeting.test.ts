@@ -16,4 +16,17 @@ describe('loadGreeting', () => {
             message: 'Hello, Ada!',
         });
     });
+
+    it('trims the name before calling the API', async () => {
+        const getGreeting = vi.fn().mockResolvedValue({ message: 'Hello, Ada!' });
+        const api: GreetingApi = { getGreeting };
+
+        const result = await loadGreeting('  Ada  ', api);
+
+        expect(getGreeting).toHaveBeenCalledWith('Ada');
+        expect(result).toEqual({
+            submittedName: 'Ada',
+            message: 'Hello, Ada!',
+        });
+    });
 });
