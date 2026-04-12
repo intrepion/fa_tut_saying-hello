@@ -30,4 +30,14 @@ void main() {
     expect(result.submittedName, 'Ada');
     expect(result.message, 'Hello, Ada!');
   });
+
+  test('returns a friendly message when the API is unavailable', () async {
+    final api = MockGreetingApi();
+    when(() => api.getGreeting('Ada')).thenThrow(Exception('network error'));
+
+    final result = await loadGreeting('Ada', api);
+
+    expect(result.submittedName, 'Ada');
+    expect(result.message, 'Sorry, the greeting API is unavailable right now.');
+  });
 }
