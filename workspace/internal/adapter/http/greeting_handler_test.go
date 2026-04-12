@@ -43,3 +43,26 @@ func TestGreetingHandler_GetGreetingReturnsCanonicalJson(t *testing.T) {
 	assert.Equal(t, "Hello, Ada!", body.Message)
 	service.AssertExpectations(t)
 }
+
+func TestGreetingHandler_GetGreetingDelegatesEmptyNameForGenericGreeting(t *testing.T) {
+	e := echo.New()
+	req := httptest.NewRequest(http.MethodGet, "/api/greeting", nil)
+	rec := httptest.NewRecorder()
+	ctx := e.NewContext(req, rec)
+
+	service := new(MockGreetingService)
+	service.On("Greet", "").Return("Hello!")
+
+	handler := NewGreetingHandler(service)
+	err := handler.GetGreeting(ctx)
+
+	assert.NoError(t, err)
+	assert.Equal(t, http.StatusOK, rec.Code)
+
+	var body contracts.GreetingResponse
+	err = json.Unmarshal(rec.Body.Bytes(), &body)
+
+	assert.NoError(t, err)
+	assert.Equal(t, "Hello!", body.Message)
+	service.AssertExpectations(t)
+}
