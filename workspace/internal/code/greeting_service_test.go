@@ -13,3 +13,11 @@ func TestGreetingService_GreetReturnsPersonalGreetingForNonEmptyName(t *testing.
 
 	assert.Equal(t, "Hello, Ada!", result)
 }
+
+func TestGreetingService_GreetTrimsWhitespaceBeforeGreeting(t *testing.T) {
+	service := GreetingService{}
+
+	result := service.Greet("  Ada  ")
+
+	assert.Equal(t, "Hello, Ada!", result)
+}
