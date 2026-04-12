@@ -29,4 +29,17 @@ describe("loadGreeting", () => {
       message: "Hello, Ada!",
     });
   });
+
+  it("returns a friendly message when the API is unavailable", async () => {
+    const getGreeting = vi.fn().mockRejectedValue(new Error("network error"));
+    const api: GreetingApi = { getGreeting };
+
+    const result = await loadGreeting("Ada", api);
+
+    expect(getGreeting).toHaveBeenCalledWith("Ada");
+    expect(result).toEqual({
+      submittedName: "Ada",
+      message: "Sorry, the greeting API is unavailable right now.",
+    });
+  });
 });
