@@ -21,3 +21,19 @@ func TestGreetingService_GreetTrimsWhitespaceBeforeGreeting(t *testing.T) {
 
 	assert.Equal(t, "Hello, Ada!", result)
 }
+
+func TestGreetingService_GreetReturnsGenericGreetingForEmptyName(t *testing.T) {
+	service := GreetingService{}
+
+	result := service.Greet("")
+
+	assert.Equal(t, "Hello!", result)
+}
+
+func TestGreetingService_GreetReturnsGenericGreetingForWhitespaceOnlyName(t *testing.T) {
+	service := GreetingService{}
+
+	result := service.Greet("   ")
+
+	assert.Equal(t, "Hello!", result)
+}
