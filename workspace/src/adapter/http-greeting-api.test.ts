@@ -21,4 +21,19 @@ describe("HttpGreetingApi", () => {
     );
     expect(result).toEqual({ message: "Hello, Ada!" });
   });
+
+  it("omits the query string for empty input", async () => {
+    const fetchMock = vi.fn().mockResolvedValue({
+      json: vi.fn().mockResolvedValue({ message: "Hello!" }),
+    });
+    vi.stubGlobal("fetch", fetchMock);
+
+    const api = new HttpGreetingApi("http://localhost:25616");
+    const result = await api.getGreeting("");
+
+    expect(fetchMock).toHaveBeenCalledWith(
+      "http://localhost:25616/api/greeting",
+    );
+    expect(result).toEqual({ message: "Hello!" });
+  });
 });
