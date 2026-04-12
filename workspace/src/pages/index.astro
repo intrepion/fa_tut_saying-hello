@@ -1,0 +1,47 @@
+---
+const apiBaseUrl = 'http://localhost:25616';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Saying Hello</title>
+  </head>
+  <body>
+    <main data-api-base-url={apiBaseUrl}>
+      <h1>Saying Hello</h1>
+      <form data-greeting-form>
+        <label for="name-input">Name</label>
+        <input data-greeting-name id="name-input" name="name" type="text" />
+        <button type="submit">Say hello</button>
+      </form>
+      <p data-greeting-output aria-live="polite"></p>
+    </main>
+
+    <script>
+      import { HttpGreetingApi } from '../adapter/http-greeting-api';
+      import { bindGreetingForm } from '../adapter/bind-greeting-form';
+
+      const page = document.querySelector('[data-api-base-url]');
+      const form = document.querySelector('[data-greeting-form]');
+      const nameInput = document.querySelector('[data-greeting-name]');
+      const output = document.querySelector('[data-greeting-output]');
+      const apiBaseUrl = page?.getAttribute('data-api-base-url');
+
+      if (
+        form instanceof HTMLFormElement &&
+        nameInput instanceof HTMLInputElement &&
+        output instanceof HTMLElement &&
+        apiBaseUrl
+      ) {
+        bindGreetingForm({
+          form,
+          nameInput,
+          output,
+          api: new HttpGreetingApi(apiBaseUrl),
+        });
+      }
+    </script>
+  </body>
+</html>
