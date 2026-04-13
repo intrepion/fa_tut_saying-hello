@@ -9,10 +9,18 @@ class GreetingViewModel {
 
 Future<GreetingViewModel> loadGreeting(String name, GreetingApi api) async {
   final submittedName = name.trim();
-  final response = await api.getGreeting(submittedName);
 
-  return GreetingViewModel(
-    submittedName: submittedName,
-    message: response.message,
-  );
+  try {
+    final response = await api.getGreeting(submittedName);
+
+    return GreetingViewModel(
+      submittedName: submittedName,
+      message: response.message,
+    );
+  } catch (_) {
+    return GreetingViewModel(
+      submittedName: submittedName,
+      message: 'Sorry, the greeting API is unavailable right now.',
+    );
+  }
 }
