@@ -8,7 +8,11 @@ class GreetingViewModel {
 }
 
 Future<GreetingViewModel> loadGreeting(String name, GreetingApi api) async {
-  final response = await api.getGreeting(name);
+  final submittedName = name.trim();
+  final response = await api.getGreeting(submittedName);
 
-  return GreetingViewModel(submittedName: name, message: response.message);
+  return GreetingViewModel(
+    submittedName: submittedName,
+    message: response.message,
+  );
 }
