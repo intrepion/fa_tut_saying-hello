@@ -9,4 +9,12 @@ void main() {
 
     expect(result, 'Hello, Ada!');
   });
+
+  test('trims whitespace before greeting', () {
+    final service = DefaultGreetingService();
+
+    final result = service.greet('  Ada  ');
+
+    expect(result, 'Hello, Ada!');
+  });
 }
