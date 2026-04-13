@@ -17,4 +17,20 @@ void main() {
 
     expect(result, 'Hello, Ada!');
   });
+
+  test('returns the generic greeting for empty input', () {
+    final service = DefaultGreetingService();
+
+    final result = service.greet('');
+
+    expect(result, 'Hello!');
+  });
+
+  test('returns the generic greeting for whitespace-only input', () {
+    final service = DefaultGreetingService();
+
+    final result = service.greet('   ');
+
+    expect(result, 'Hello!');
+  });
 }
