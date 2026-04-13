@@ -18,4 +18,16 @@ void main() {
     expect(result.submittedName, 'Ada');
     expect(result.message, 'Hello, Ada!');
   });
+
+  test('trims the name before calling the API', () async {
+    final api = MockGreetingApi();
+    when(
+      () => api.getGreeting('Ada'),
+    ).thenAnswer((_) async => const GreetingResponse(message: 'Hello, Ada!'));
+
+    final result = await loadGreeting('  Ada  ', api);
+
+    expect(result.submittedName, 'Ada');
+    expect(result.message, 'Hello, Ada!');
+  });
 }
